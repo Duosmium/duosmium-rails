@@ -1,0 +1,47 @@
+<% i = @i %>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title><%= @title || "Duosmium" %></title>
+  <% unless @description.nil? %>
+  <meta name="Description" content="<%= @description %>">
+  <%  end %>
+  <%= favicon_pack_tag 'favicon.png' %>
+  <% if @custom_colors %>
+    <style type="text/css">
+      <% color = find_bg_color(@result.name) %>
+      .results-classic-thead-background {
+          background-color: <%= color %> !important;
+      }
+      .btn, .custom-control-label::after {
+          color: <%= color %> !important;
+      }
+      <% if i.tournament.tracks? %>
+        </style>
+        <style id="track-style">
+      <% end %>
+      <%= trophy_and_medal_css(i.tournament.trophies, i.tournament.medals).html_safe %>
+      </style>
+  <% end %>
+  <%# if current_page.data.manifest %>
+<!--    <link rel="manifest" href="<%#= current_page.data.manifest %>">-->
+  <%# end %>
+</head>
+<body>
+<%= yield %>
+<% if @custom_colors && @i.tournament.tracks? %>
+  <x-st id="sub-combined-style">
+    <%= trophy_and_medal_css(@i.tournament.trophies, @i.tournament.medals) %>
+  </x-st>
+  <% @i.tracks.each do |sub, sub_i| %>
+    <x-st id="sub-<%= sub %>-style">
+      <%= trophy_and_medal_css(sub_i.tournament.trophies, sub_i.tournament.medals) %>
+    </x-st>
+  <% end %>
+<% end %>
+</body>
+</html>

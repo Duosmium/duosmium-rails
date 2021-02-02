@@ -1,0 +1,1 @@
+import '../styles/results_placeholder.scss';
