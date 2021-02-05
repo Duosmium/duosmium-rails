@@ -1,0 +1,54 @@
+<% teams = i.teams %>
+<div class="card" data-search="<%= search_string(i) %>">
+  <div class="card-header text-light shadow-sm"
+       style="background-color: <%= find_bg_color(filename) %>">
+    <h2 class="card-title">
+      <%= i.tournament.year %>
+      <%= tournament_title(i.tournament) %>
+      <span class="badge division-<%= i.tournament.division.downcase %>">
+          <small>Division <%= i.tournament.division %></small>
+        </span>
+    </h2>
+    <h3 class="card-subtitle">
+      <% if i.tournament.start_date.strftime('%A, %B %-d, %Y') == i.tournament.end_date.strftime('%A, %B %-d, %Y')%>
+        <%= i.tournament.date.strftime('%A, %B %-d, %Y') %>
+      <% else %>
+        <%= i.tournament.start_date.strftime('%A, %B %-d, %Y') %> - <%= i.tournament.end_date.strftime('%A, %B %-d, %Y') %>
+      <% end %>
+      <br>@ <%= i.tournament.location %>
+    </h3>
+  </div>
+  <div class="card-body splash-wrapper"
+       data-toggle="collapse"
+       data-target="#summary-<%= filename %>"
+       aria-expanded="false"
+       aria-controls="summary-<%= filename %>">
+    <%= image_pack_tag "media/images/logos/" + find_logo_path(filename) %>
+    <!--          <img class="lazy"-->
+    <!--               data-src="/assets/images/<%#= find_logo_path(filename) %>"-->
+    <!--               alt="Tournament logo"/>-->
+    <div class="summary collapse" id="summary-<%= filename %>">
+      <dl class="list-unstyled row">
+        <% summary_titles.each_with_index do |title, i| %>
+          <% next unless teams[i] %>
+          <dt class="col-sm-3 <%= 'd-none d-sm-block' if i >= 3 %>">
+            <%= title %>
+          </dt>
+          <dd class="col-sm-9 <%= 'd-none d-sm-block' if i >= 3 %>">
+            <%= format_school(teams[i]) %>
+            <%= teams[i].suffix %>
+            <small><%= teams[i].state %></small>
+            (<%= teams[i].points %> pts)
+          </dd>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+  <div class="card-footer card-actions bg-light">
+    <button class="btn btn-outline-primary summary">Summary</button>
+    <a href="../results/<%= filename %>" class="btn btn-outline-primary full-results">Full Results</a>
+    <span class="badge badge-dark teams-count">
+        <%= i.tournament.nonexhibition_teams_count %> Teams
+      </span>
+  </div>
+</div>
