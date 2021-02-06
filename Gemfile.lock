@@ -118,6 +118,7 @@ GEM
     oily_png (1.2.1)
       chunky_png (~> 1.3.7)
     optimist (3.0.1)
+    pg (1.2.3)
     psych (3.3.0)
     public_suffix (4.0.6)
     puma (5.1.1)
@@ -188,7 +189,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     thor (1.1.0)
@@ -220,6 +220,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -230,6 +231,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   miro
+  pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.1)
@@ -237,7 +239,6 @@ DEPENDENCIES
   sciolyff-duosmium
   selenium-webdriver
   spring
-  sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
@@ -248,4 +249,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.2.6
+   2.2.8
