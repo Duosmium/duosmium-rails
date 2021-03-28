@@ -84,4 +84,5 @@ development:
 #
 production:
   <<: *default
+  host: postgres
   database: duosmium_production

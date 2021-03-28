@@ -1,15 +1,15 @@
 class ResultsController < ApplicationController
   def index
     @results = Result.all.order('name DESC')
-    @recents = Result.all.order('created_at DESC').first(5)
+    if stale?(@results)
+      @recents = Result.all.order('created_at DESC').first(5)
+    end
   end
 
   def show
-    @result = Rails.cache.fetch(params[:name]) do
-      Result.find_by_name(params[:name])
-    end
-    @i = Rails.cache.fetch("#{params[:name]}_interpreter") do
-      SciolyFF::Interpreter.new(@result.data)
+    @result = Result.find_by_name(params[:name])
+    if stale?(@result)
+      @i = SciolyFF::Interpreter.new(@result.data)
     end
   end
 
@@ -20,8 +20,6 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(result_params)
     if @result.save
-      Rails.cache.write(Result.find(@id).name, Result.find(@id))
-      Rails.cache.write("#{Result.find(@id).name}_interpreter", SciolyFF::Interpreter.new(Result.find(@id).data))
       redirect_to root_path
     else
       render :new
@@ -36,8 +34,6 @@ class ResultsController < ApplicationController
     @result = Result.find_by_name(params[:name])
     @id = @result.id
     if @result.update(result_params)
-      Rails.cache.write(Result.find(@id).name, Result.find(@id))
-      Rails.cache.write("#{Result.find(@id).name}_interpreter", SciolyFF::Interpreter.new(Result.find(@id).data))
       redirect_to name: Result.find(@id).name
     else
       render :edit
