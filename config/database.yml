@@ -85,4 +85,4 @@ production:
   host: db
   database: duosmium_rails_production
   username: duosmium
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
