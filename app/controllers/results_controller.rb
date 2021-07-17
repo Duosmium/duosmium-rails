@@ -1,16 +1,13 @@
 class ResultsController < ApplicationController
+  caches_page :show, :index, :schools
   def index
     @results = Result.all.order('name DESC')
-    if stale?(@results)
-      @recents = Result.all.order('created_at DESC').first(5)
-    end
+    @recents = Result.all.order('created_at DESC').first(5) if stale?(@results)
   end
 
   def show
     @result = Result.find_by_name(params[:name])
-    if stale?(@result)
-      @i = SciolyFF::Interpreter.new(@result.data)
-    end
+    @i = SciolyFF::Interpreter.new(@result.data) if stale?(@result)
   end
 
   def new
@@ -20,7 +17,8 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(result_params)
     if @result.save
-      redirect_to root_path
+      GenIndexJob.perform_later
+      redirect_to "/results/#{@result.name}"
     else
       render :new
     end
@@ -33,7 +31,10 @@ class ResultsController < ApplicationController
   def update
     @result = Result.find_by_name(params[:name])
     @id = @result.id
+    @name = @result.name
     if @result.update(result_params)
+      expire_page action: "show", name: @name
+      GenIndexJob.perform_later
       redirect_to name: Result.find(@id).name
     else
       render :edit
@@ -42,8 +43,9 @@ class ResultsController < ApplicationController
 
   def destroy
     @result = Result.find_by_name(params[:name])
+    Rails.expire_page action: "show", name: @result.name
     @result.destroy
-
+    GenIndexJob.perform_later
     redirect_to result_url
   end
 

@@ -121,8 +121,8 @@ Teams:
   school: Lyme-Old Lyme High School
   state: CT
 - number: 28
-  school: Middlesex County Academy for Science, Mathematics & Engineering Technologies
-  school abbreviation: Middlesex County Academy
+  school: Middlesex County Academy for Science, Mathematics and Engineering Technologies
+  school abbreviation: MCA for SMET
   state: NJ
 - number: 29
   school: National Cathedral School
@@ -147,7 +147,7 @@ Teams:
   school: Quaker Valley High School
   state: PA
 - number: 37
-  school: Sacred Heart Greenwich
+  school: Sacred Heart Greenwich High School
   state: CT
 - number: 38
   school: St. Anthony's High School
@@ -221,14 +221,16 @@ Teams:
   state: IL
 - number: 55
   school: West High School
+  city: Torrance
   suffix: Coconuts
   state: CA
 - number: 56
   school: West High School
+  city: Torrance
   suffix: Pineapples
   state: CA
 - number: 57
-  school: Enloe Magnet High School
+  school: William G. Enloe High School
   state: NC
 Placings:
 - team: 1

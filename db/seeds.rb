@@ -8,10 +8,10 @@
 Result.delete_all
 result_list = []
 Dir.children('data').each do |yaml|
+  puts(yaml)
   result_list.append({
                        name: yaml.gsub(".yaml", ""),
                        data: File.read("data/#{yaml}")
-                       # interpreter: SciolyFF::Interpreter.new(File.read("data/#{yaml}"))
                      })
 end
 

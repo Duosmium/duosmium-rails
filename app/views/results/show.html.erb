@@ -1,5 +1,5 @@
 <% @custom_colors = true %>
-<% i = @i %>
+<% i = @i || @local_assigns[":@i"] %>
 <%= javascript_pack_tag 'results_show', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_pack_tag 'results_show', media: 'all', 'data-turbolinks-track': 'reload' %>
 <% @title = "#{i.tournament.year} "\
@@ -43,7 +43,7 @@
       <div class="tournament-info">
         <h1>
           <%= i.tournament.year %>
-          <%= tournament_title(i.tournament) %>&nbsp;(Div. <%= i.tournament.division %><%= ' <span id="track">Combined</span>' if i.tournament.tracks? %>)
+          <%= tournament_title(i.tournament) %>&nbsp;(Div. <%= i.tournament.division %><%= ' <span id="track">Combined</span>'.html_safe if i.tournament.tracks? %>)
         </h1>
         <% if i.tournament.start_date.strftime('%A, %B %-d, %Y') == i.tournament.end_date.strftime('%A, %B %-d, %Y')%>
           <p><%= i.tournament.date.strftime('%A, %B %-d, %Y') %></p>
@@ -92,7 +92,7 @@
       </div>
       <p class="source">
         Source:
-        <a href="https://duosmium.org/results/<%= result_url %>">
+        <a href="https://duosmium.org/results/<%= @result.name %>">
           Duosmium Results
         </a>
       </p>
@@ -150,7 +150,7 @@
   <% i.teams.each do |tm| %>
     <tr data-team-number="<%= tm.number %>"
         data-school="<%= full_school_name(tm) %>"
-        data-team-name="<%= full_team_name(tm) %>"<%= " data-track=\"#{tm.track}\"" if i.tournament.tracks? %>>
+        data-team-name="<%= full_team_name(tm) %>"<%= " data-track=#{tm.track_name}" if i.tournament.tracks? %>>
       <td class="number">
         <a href="?team=<%= tm.number %>"
            data-toggle="modal" data-target="#team-detail">
@@ -186,8 +186,8 @@
         <% end %>
       </td>
       <td class="event-points-focus" data-points=""><div></div></td>
-      <td class="rank" data-points="<%= tm.rank %>"<%= " data-o-points=\"#{tm.rank}\" data-o-sup-tag=\"#{bids_sup_tag(tm)}\" data-sub-points=\"#{tm.track_team.rank}\"" if tm.track %>><div><%= tm.rank %><%= bids_sup_tag(tm).html_safe %></div></td>
-      <td class="total-points"<%= " data-o-points=\"#{tm.points}\" data-sub-points=\"#{tm.track_team.points}\"" if tm.track %>><%= tm.points %></td>
+      <td class="rank" data-points=<%= tm.rank %><%= " data-o-points=#{tm.rank} data-o-sup-tag=\"#{bids_sup_tag(tm)}\" data-sub-points=#{tm.track_rank}" if tm.track %>><div><%= tm.rank %><%= bids_sup_tag(tm) %></div></td>
+      <td class="total-points"<%= " data-o-points=#{tm.points} data-sub-points=#{tm.track_points}" if tm.track_name %>><%= tm.points %></td>
       <% i.events.each do |e| %>
         <% placing = e.placing_for(tm) %>
         <% points = placing.isolated_points %>
@@ -198,21 +198,21 @@
             data-notes="<%= placing_notes(placing) %>"
             data-points="<%= unknown ? '??' : points %>"
             data-place="<%= unknown && placing.points_limited_by_maximum_place? ? "≥#{i.tournament.maximum_place}" : place %>"
-            <% if tm.track %>
+            <% if tm.track_name %>
             data-o-true-points="<%= placing.points %>"
             data-o-notes="<%= placing_notes(placing) %>"
             data-o-points="<%= unknown ? '??' : points %>"
             data-o-place="<%= unknown && placing.points_limited_by_maximum_place? ? "≥#{i.tournament.maximum_place}" : place %>"
             data-o-sup-tag="<%= sup_tag(placing) %>"
-            <% sp = placing.track_placing %>
-            data-sub-true-points="<%= sp.points %>"
+            <% sp = placing %>
+            data-sub-true-points="<%= sp.track_points %>"
             data-sub-notes="<%= placing_notes(sp) %>"
-            data-sub-points="<%= sp.unknown? ? '??' : sp.isolated_points %>"
-            data-sub-place="<%= sp.place %>"
+            data-sub-points="<%= sp.unknown? ? '??' : sp.isolated_track_points %>"
+            data-sub-place="<%= sp.track_place %>"
             data-sub-sup-tag="<%= sup_tag(sp) %>"
             <% end %>
             data-sortable-place="<%= place ? place : (unknown ? 998000 + points : 999000 + points) %>">
-          <div><%= unknown && !placing.points_limited_by_maximum_place? ? '??' : points %><%= sup_tag(placing) %></div>
+          <div><%= unknown && !placing.points_limited_by_maximum_place? ? '??' : points %><%= sup_tag(placing).html_safe %></div>
         </td>
       <% end %>
       <% pen_points = tm.penalties.sum(&:points) %>
@@ -268,11 +268,11 @@
               Combined (all teams)
             </label>
           </div>
-          <% i.tournament.tracks.each do |s, _| %>
+          <% i.tournament.tracks.each do |s| %>
             <div>
-              <input type="radio" id="sub-<%= s %>" name="track">
-              <label class="custom-control-label" for="sub-<%= s %>">
-                <%= s %>
+              <input type="radio" id="sub-<%= s.name %>" name="track">
+              <label class="custom-control-label" for="sub-<%= s.name %>">
+                <%= s.name %>
               </label>
             </div>
           <% end %>
@@ -455,3 +455,13 @@
     <%# populated using JS %>
   </div>
 </div>
+<script>
+    const teamPoints = [<% i.teams.each do |tm| %><%= tm.points %>, <% end %>]
+    const teamPointsByTrack = {
+    <% if i.tournament.tracks? %>
+    <% i.tournament.tracks.each do |t| %><%= t.name %>:
+      [<% t.teams.each do |tm| %><%= tm.track_points %>, <% end %>],
+    <% end %>
+    <% end %>
+    }
+</script>

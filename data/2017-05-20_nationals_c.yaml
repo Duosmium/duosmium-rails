@@ -50,7 +50,7 @@ Teams:
   school abbreviation: NCSSM
   number: 5
   state: NC
-- school: Enloe Magnet High School
+- school: William G. Enloe High School
   number: 6
   state: NC
 - school: Northville High School
@@ -89,7 +89,7 @@ Teams:
 - school: Archimedean Upper Conservatory
   number: 18
   state: FL
-- school: Liberal Arts and Science Academy High School
+- school: Liberal Arts and Science Academy
   school abbreviation: LASA High School
   number: 19
   state: TX
@@ -167,7 +167,7 @@ Teams:
 - school: Merrimack High School
   number: 43
   state: NH
-- school: ʻIolani School
+- school: Iolani School
   number: 44
   state: HI
 - school: University High School

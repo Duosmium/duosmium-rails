@@ -1,4 +1,5 @@
 <% teams = i.teams %>
+<%# filename = name_from_interpreter(i) %>
 <div class="card" data-search="<%= search_string(i) %>">
   <div class="card-header text-light shadow-sm"
        style="background-color: <%= find_bg_color(filename) %>">
@@ -11,7 +12,7 @@
     </h2>
     <h3 class="card-subtitle">
       <% if i.tournament.start_date.strftime('%A, %B %-d, %Y') == i.tournament.end_date.strftime('%A, %B %-d, %Y')%>
-        <%= i.tournament.date.strftime('%A, %B %-d, %Y') %>
+        <%= i.tournament.start_date.strftime('%A, %B %-d, %Y') %>
       <% else %>
         <%= i.tournament.start_date.strftime('%A, %B %-d, %Y') %> - <%= i.tournament.end_date.strftime('%A, %B %-d, %Y') %>
       <% end %>
@@ -23,10 +24,10 @@
        data-target="#summary-<%= filename %>"
        aria-expanded="false"
        aria-controls="summary-<%= filename %>">
-    <%= image_pack_tag "media/images/logos/" + find_logo_path(filename) %>
-    <!--          <img class="lazy"-->
-    <!--               data-src="/assets/images/<%#= find_logo_path(filename) %>"-->
-    <!--               alt="Tournament logo"/>-->
+    <%= image_pack_tag "media/images/logos/" + find_logo_path(filename), loading: "lazy" %>
+<!--              <img class="lazy"-->
+<!--                   data-src="/assets/images/logos/<%#= find_logo_path(filename) %>"-->
+<!--                   alt="Tournament logo"/>-->
     <div class="summary collapse" id="summary-<%= filename %>">
       <dl class="list-unstyled row">
         <% summary_titles.each_with_index do |title, i| %>

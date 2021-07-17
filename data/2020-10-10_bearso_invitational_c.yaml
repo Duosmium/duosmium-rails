@@ -259,15 +259,15 @@ Teams:
   school: Homeschool Science Colorado
   state: CO
 - number: 62
-  school: ʻIolani School
+  school: Iolani School
   suffix: Simple
   state: HI
 - number: 63
-  school: ʻIolani School
+  school: Iolani School
   suffix: Dimple
   state: HI
 - number: 64
-  school: ʻIolani School
+  school: Iolani School
   suffix: Alfalfa
   state: HI
 - number: 65
@@ -306,11 +306,11 @@ Teams:
   school: Langley High School
   state: VA
 - number: 74
-  school: Liberal Arts and Science Academy High School
+  school: Liberal Arts and Science Academy
   suffix: A
   state: TX
 - number: 75
-  school: Liberal Arts and Science Academy High School
+  school: Liberal Arts and Science Academy
   suffix: B
   state: TX
 - number: 76
@@ -431,7 +431,7 @@ Teams:
   school: Pleasant Grove High School
   state: CA
 - number: 108
-  school: Polytechnic Upper School
+  school: Polytechnic School
   state: CA
 - number: 109
   school: Quarry Lane School
@@ -612,18 +612,22 @@ Teams:
   state: GA
 - number: 156
   school: West High School
+  city: Torrance
   suffix: Cookies
   state: CA
 - number: 157
   school: West High School
+  city: Torrance
   suffix: Wafers
   state: CA
 - number: 158
   school: West Windsor-Plainsboro High School North
+  school abbreviation: WW-P High School North
   suffix: '1'
   state: NJ
 - number: 159
   school: West Windsor-Plainsboro High School North
+  school abbreviation: WW-P High School North
   suffix: '2'
   state: NJ
 - number: 160
@@ -769,6 +773,7 @@ Teams:
   state: CA
 - number: 200
   school: University High School
+  city: Irvine
   state: CA
 - number: 201
   school: Orlando Science Schools

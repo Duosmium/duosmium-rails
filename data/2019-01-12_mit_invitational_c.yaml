@@ -1,6 +1,6 @@
 ---
 Tournament:
-  name: MIT Science Olympiad Invitational Tournament
+  name: MIT Science Olympiad Invitational
   short name: MIT Invitational
   location: Massachusetts Institute of Technology
   state: MA
@@ -195,7 +195,7 @@ Teams:
   school: Falmouth High School
   state: ME
 - number: 39
-  school: Liberal Arts and Science Academy High School
+  school: Liberal Arts and Science Academy
   school abbreviation: LASA High School
   state: TX
 - number: 40
@@ -247,7 +247,7 @@ Teams:
   school: Bothell High School
   state: WA
 - number: 57
-  school: Enloe Magnet High School
+  school: William G. Enloe High School
   state: NC
 - number: 58
   school: Belmont High School

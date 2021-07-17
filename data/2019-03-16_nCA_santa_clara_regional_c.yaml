@@ -1,7 +1,7 @@
 ---
 Tournament:
-  name: Santa Clara County Regional Science Olympiad Tournament
-  short name: Santa Clara County Regional
+  name: Santa Clara County Regional Tournament
+  short name: Santa Clara Regional
   location: San Jose City College
   state: nCA
   level: Regionals
@@ -138,6 +138,7 @@ Teams:
   state: CA
 - number: 27
   school: Los Altos High School
+  city: Los Altos
   suffix: Blue
   state: CA
 - number: 28
@@ -171,6 +172,7 @@ Teams:
   state: CA
 - number: 36
   school: Los Altos High School
+  city: Los Altos
   suffix: White
   state: CA
 - number: 37

@@ -6,8 +6,8 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: duosmium
-      POSTGRES_PASSWORD: e1d9b2OJcEvuZNo2Jj0z1IEmi4w59C0sRd125iLvip5IoKuRLCaGClgh1SzVgyFe
-      POSTGRES_DB: duosmium_production
+      POSTGRES_PASSWORD: e1d9b2OJcEvuZNo2Jj0z1IEmi4w59C0sRd125iLvip5IoKuRLCaGClgh1SzVgyFe  # change, obviously
+      POSTGRES_DB: duosmium_rails_production
   web:
     build: .
     links:
