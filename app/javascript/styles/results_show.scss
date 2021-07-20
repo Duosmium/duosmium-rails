@@ -33,9 +33,9 @@ x-st {
 div.results-classic-wrapper {
   // make sticky stuff work
   overflow: auto;
-  height: 100vh;
+  //height: 100vh;
   // always show scrollbar area on Firefox for layout consistenty when filtering
-  overflow-y: scroll;
+  //overflow-y: scroll;
   // ensure that the first four table columns are always visible, even on small
   // screens (e.g. 320px or less)
   font-size: 0.9375rem; // up from default of 14px (if 1rem = 16px)
