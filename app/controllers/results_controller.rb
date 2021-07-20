@@ -17,7 +17,8 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(result_params)
     if @result.save
-      GenIndexJob.perform_later
+      cache_page action: "index"
+      cache_page action: "schools"
       redirect_to "/results/#{@result.name}"
     else
       render :new
@@ -34,7 +35,8 @@ class ResultsController < ApplicationController
     @name = @result.name
     if @result.update(result_params)
       expire_page action: "show", name: @name
-      GenIndexJob.perform_later
+      expire_page action: "index"
+      expire_page action: "schools"
       redirect_to name: Result.find(@id).name
     else
       render :edit
@@ -43,10 +45,9 @@ class ResultsController < ApplicationController
 
   def destroy
     @result = Result.find_by_name(params[:name])
-    Rails.expire_page action: "show", name: @result.name
+    expire_page action: "show", name: @result.name
     @result.destroy
-    GenIndexJob.perform_later
-    redirect_to result_url
+    redirect_to root_url
   end
 
   def schools

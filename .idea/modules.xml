@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/duosmium-rails.iml" filepath="$PROJECT_DIR$/.idea/duosmium-rails.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/duosmium-rails-git.iml" filepath="$PROJECT_DIR$/.idea/duosmium-rails-git.iml" />
     </modules>
   </component>
 </project>

@@ -26,8 +26,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'actionpack-page_caching'
-gem 'daemons'
-gem 'delayed_job_active_record'
+#gem 'daemons'
+#gem 'delayed_job_active_record'
+#gem 'rails-observers'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

@@ -7,6 +7,10 @@ class Result < ApplicationRecord
 
   def gen_card
     rc = ResultsController.new
-    self.card = rc.render_to_string :template => 'results/_card', :locals => {:i => SciolyFF::Interpreter.new(self.data), :filename => self.name}
+    self.card = rc.render_to_string :template => 'results/_card', :locals => {:i => SciolyFF::Interpreter.new(data), :filename => name}
+  end
+
+  def data=(val)
+    write_attribute(:data, val.gsub('\r', ''))
   end
 end

@@ -186,7 +186,7 @@
         <% end %>
       </td>
       <td class="event-points-focus" data-points=""><div></div></td>
-      <td class="rank" data-points=<%= tm.rank %><%= " data-o-points=#{tm.rank} data-o-sup-tag=\"#{bids_sup_tag(tm)}\" data-sub-points=#{tm.track_rank}" if tm.track %>><div><%= tm.rank %><%= bids_sup_tag(tm) %></div></td>
+      <td class="rank" data-points=<%= tm.rank %><%= " data-o-points=#{tm.rank} data-o-sup-tag=\"#{bids_sup_tag(tm)}\" data-sub-points=#{tm.track_rank}" if tm.track %>><div><%= tm.rank %><%= bids_sup_tag(tm).html_safe %></div></td>
       <td class="total-points"<%= " data-o-points=#{tm.points} data-sub-points=#{tm.track_points}" if tm.track_name %>><%= tm.points %></td>
       <% i.events.each do |e| %>
         <% placing = e.placing_for(tm) %>
