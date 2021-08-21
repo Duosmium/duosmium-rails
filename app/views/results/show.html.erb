@@ -223,28 +223,28 @@
   <% end %>
   </tbody>
   </table>
-</div>
-<div class="results-classic-footnotes"
-     style="width: <%= 2*(i.events.count + 1) + 28 %>em">
-  <% if i.tournament.ties? || i.tournament.exempt_placings? || i.tournament.worst_placings_dropped? || i.tournament.bids.nonzero? %>
-    <div class="wrapper">
-      <% if i.tournament.bids.nonzero? %>
-        <p class="footnote">
-          <sup>✧</sup><%= bids_sup_tag_note(i.tournament) %>
-        </p>
-      <% end %>
-      <% if i.tournament.exempt_placings? || i.tournament.worst_placings_dropped? %>
-        <p class="footnote">
-          <sup>◊</sup>Result was not counted as part of total score
-        </p>
-      <% end %>
-      <% if i.tournament.ties_outside_of_maximum_places? %>
-        <p class="footnote">
-          <sup>*</sup>Tied with another team
-        </p>
-      <% end %>
-    </div>
-  <% end %>
+  <div class="results-classic-footnotes"
+       style="width: <%= 2*(i.events.count + 1) + 28 %>em">
+    <% if i.tournament.ties? || i.tournament.exempt_placings? || i.tournament.worst_placings_dropped? || i.tournament.bids.nonzero? %>
+      <div class="wrapper">
+        <% if i.tournament.bids.nonzero? %>
+          <p class="footnote">
+            <sup>✧</sup><%= bids_sup_tag_note(i.tournament) %>
+          </p>
+        <% end %>
+        <% if i.tournament.exempt_placings? || i.tournament.worst_placings_dropped? %>
+          <p class="footnote">
+            <sup>◊</sup>Result was not counted as part of total score
+          </p>
+        <% end %>
+        <% if i.tournament.ties_outside_of_maximum_places? %>
+          <p class="footnote">
+            <sup>*</sup>Tied with another team
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
 <div class="modal" id="filters" tabindex="-1" role="dialog"
      aria-labelledby="filters-label" aria-hidden="true">
